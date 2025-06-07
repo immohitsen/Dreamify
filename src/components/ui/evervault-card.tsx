@@ -1,7 +1,12 @@
 "use client";
 import React from "react";
 
-export const Icon = ({ className, ...rest }: any) => {
+interface Icon {
+  className: string;
+  // Add other prop types as needed
+}
+
+export const Icon = ({ className, ...rest }: Icon) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
