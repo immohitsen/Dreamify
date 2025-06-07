@@ -11,11 +11,8 @@ import {
 } from "@/components/ui/resizable-navbar";
 import React from 'react';
 import { useState } from "react";
-import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
-  const router = useRouter();
-    const [loading, setloading] = React.useState(false);
   const navItems = [
     {
       name: "Dashboard",
@@ -77,18 +74,3 @@ export default function Navbar() {
   );
 }
 
-const DummyContent = () => {
-  return (
-    <div className="container mx-auto p-8 pt-24 bg-black">
-      <h1 className="mb-4 mt-5 text-center text-3xl font-bold">
-        Click on the View button to See  Details of each Employee
-      </h1>
-      <p className="mb-10 text-center text-sm text-zinc-500">
-        For demo purpose we have kept the position as{" "}
-        <span className="font-medium">Sticky</span>. Keep in mind that this
-        component is <span className="font-medium">fixed</span> and will not
-        move when scrolling.
-      </p>
-    </div>
-  );
-};

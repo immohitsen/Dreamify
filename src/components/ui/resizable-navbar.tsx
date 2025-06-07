@@ -246,12 +246,12 @@ export const NavbarLogo = () => {
       /> */}
       {/* <span className="font-medium text-black dark:text-white">FlamsHR</span> */}
       {/* </a> */}
-      <a
+      <Link
         href="/"
         className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-md font-normal text-white"
       >
         Dreamify
-      </a>
+      </Link>
     </>
   );
 };

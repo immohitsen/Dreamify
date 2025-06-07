@@ -41,7 +41,7 @@ export default function Dashboard() {
             htmlFor="dream"
             className="text-sm text-black dark:text-white font-normal"
           >
-            What's your dream?
+            What&apos;s your dream?
           </label>
           <div className="relative rounded-lg border border-black/[0.2] dark:border-white/[0.2] bg-white dark:bg-black px-3 py-2 shadow-inner">
             <textarea
