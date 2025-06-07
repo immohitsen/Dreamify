@@ -4,15 +4,25 @@ import React from "react";
 import { useState } from "react";
 import { Icon } from "@/components/ui/evervault-card";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { CirclePlus } from "lucide-react";
 
 export default function Dashboard() {
   const [dream, setDream] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([
+    "I was flying through the clouds above a city...",
+    "I saw my childhood home underwater with glowing fish...",
+  ]);
+
+  const handleSuggestionClick = (text: string) => {
+    setDream(text);
+  };
 
   const handleSubmit = async () => {
     if (!dream.trim()) return;
     setLoading(true);
+    setSuggestions([]);
     setResponse("");
     const res = await fetch("/api/dream", {
       method: "POST",
@@ -69,9 +79,36 @@ export default function Dashboard() {
                   }, 0);
                 }
               }}
-              placeholder="Enter your dream here..."
+              placeholder="What did you see in your dream?"
               className="w-full resize-none bg-transparent outline-none text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 text-sm pr-8"
             />
+            {/* Reset Icon Button */}
+            { response && <button
+              className="absolute bottom-2 right-2 text-gray-500 hover:text-black dark:hover:text-white transition"
+              onClick={() => {
+                setDream("");
+                setResponse("");
+                setSuggestions([
+                  "I was flying through the clouds above a city...",
+                  "I saw my childhood home underwater with glowing fish...",
+                ]);
+              }}
+            >
+              <CirclePlus size={18} />
+            </button>}
+
+            {/* Suggestions */}
+            <div className="flex gap-2 flex-wrap">
+              {suggestions.map((text, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleSuggestionClick(text)}
+                  className="text-xs md:text-sm bg-white/20 dark:bg-black/30 text-black dark:text-white border border-black/10 dark:border-white/20 px-3 py-1 rounded-full hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 backdrop-blur-sm"
+                >
+                  {text}
+                </button>
+              ))}
+            </div>
             {loading ? (
               <div className="absolute bottom-2 right-2 w-5 h-5 border-2 border-t-transparent border-gray-500 dark:border-gray-300 rounded-full animate-spin" />
             ) : (
