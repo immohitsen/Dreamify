@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useState } from "react";
-import { EvervaultCard, Icon } from "@/components/ui/evervault-card";
+import { Icon } from "@/components/ui/evervault-card";
 import { ArrowRight } from "lucide-react";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
@@ -27,8 +27,8 @@ export default function Dashboard() {
   };
 
   return (
-    <div>
-      <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start max-w-2xl mx-auto p-4 relative min-h-[20rem] bg-white/10 dark:bg-black/20 backdrop-blur-sm shadow-md mt-15 mb-15 ml-5 mr-5">
+    <div className="mx-5">
+      <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start max-w-2xl mx-auto p-4 relative min-h-[20rem] bg-white/10 dark:bg-black/20 backdrop-blur-sm shadow-md mt-15 mb-15">
         {/* Corner Icons */}
         <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
         <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />

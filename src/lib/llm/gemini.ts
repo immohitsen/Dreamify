@@ -56,7 +56,7 @@ export async function dreamInterpreter(dream: string): Promise<string> {
     }
 
     return responseText;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error interpreting dream:", error);
     return "Sorry, I couldn't interpret your dream right now.";
   }
