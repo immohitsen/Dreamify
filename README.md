@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌙 Dreamify
 
-## Getting Started
+**Dreamify** is a tiny, experimental AI-powered dream interpreter.
 
-First, run the development server:
+It doesn't try to decode your dreams — it plays with them. This isn't your average productivity tool. It's more of a late-night companion, designed to stir emotion, curiosity, and reflection.
+
+Whether you're looking for some introspective fun or just bored at 3AM with a weird dream to explore — Dreamify's here for it.
+
+---
+
+## 🔗 Live Demo
+
+👉 [dreamify-zeta.vercel.app](https://dreamify-zeta.vercel.app)
+
+---
+
+## ✨ Features
+
+* Lightweight dream input experience with smooth animations
+* AI-generated, conversational dream interpretations
+* Built with modern web tech (Next.js, Tailwind CSS, Aceternity UI)
+* No login, no tracking — just vibes
+
+---
+
+## 🧠 Tech Stack
+
+* **Framework**: [Next.js](https://nextjs.org)
+* **Styling**: Tailwind CSS, Aceternity UI
+* **AI**: OpenAI GPT-based interpretation logic
+* **Deployment**: Vercel
+
+---
+
+## 🚀 Getting Started
 
 ```bash
+# Clone the repo
+git clone https://github.com/immohitsen/dreamify.git
+
+# Navigate into the directory
+cd dreamify
+
+# Install dependencies
+npm install
+
+# Run locally
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🤯 Why I Built This
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Got bored of the daily grind — DSA, dev tutorials, and never-ending freelance cycles. So I built something purely for fun. No tutorials, no strict plan. Just me, some UI libraries, and the freedom to play.
 
-## Learn More
+Not built to go viral. Just built to feel something.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This is a fun side project, but feel free to open issues or submit PRs if you're vibing with the idea.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License
+
+---
+
+Made with caffeine, curiosity, and a sprinkle of chaos ✨
