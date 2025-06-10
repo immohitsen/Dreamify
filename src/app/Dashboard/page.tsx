@@ -42,8 +42,8 @@ export default function Dashboard() {
         response: data.reply
       });
       console.log(update.data);
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (error) {
+      console.log("Something went wrong", error);
     }
   };
 
