@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { type } from "os";
 
 const dataSchema = new mongoose.Schema({
     prompt: {
