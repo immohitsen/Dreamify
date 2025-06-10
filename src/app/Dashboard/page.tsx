@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Icon } from "@/components/ui/evervault-card";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { CirclePlus } from "lucide-react";
+import axios from "axios";
 
 export default function Dashboard() {
   const [dream, setDream] = useState("");
@@ -20,18 +21,30 @@ export default function Dashboard() {
   };
 
   const handleSubmit = async () => {
-    if (!dream.trim()) return;
-    setLoading(true);
-    setSuggestions([]);
-    setResponse("");
-    const res = await fetch("/api/dream", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: dream }),
-    });
-    const data = await res.json();
-    setResponse(data.reply);
-    setLoading(false);
+    try {
+      if (!dream.trim()) return;
+      setLoading(true);
+      setSuggestions([]);
+      setResponse("");
+      const res = await fetch("/api/dream", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: dream }),
+      });
+
+      const data = await res.json();
+      setResponse(data.reply);
+      setLoading(false);
+
+
+      const update = await axios.post("/api/data", {
+        prompt: dream,
+        response: data.reply
+      });
+      console.log(update.data);
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -83,19 +96,21 @@ export default function Dashboard() {
               className="w-full resize-none bg-transparent outline-none text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 text-sm pr-8"
             />
             {/* Reset Icon Button */}
-            { response && <button
-              className="absolute bottom-2 right-2 text-gray-500 hover:text-black dark:hover:text-white transition"
-              onClick={() => {
-                setDream("");
-                setResponse("");
-                setSuggestions([
-                  "I was flying through the clouds above a city...",
-                  "I saw my childhood home underwater with glowing fish...",
-                ]);
-              }}
-            >
-              <CirclePlus size={18} />
-            </button>}
+            {response && (
+              <button
+                className="absolute bottom-2 right-2 text-gray-500 hover:text-black dark:hover:text-white transition"
+                onClick={() => {
+                  setDream("");
+                  setResponse("");
+                  setSuggestions([
+                    "I was flying through the clouds above a city...",
+                    "I saw my childhood home underwater with glowing fish...",
+                  ]);
+                }}
+              >
+                <CirclePlus size={18} />
+              </button>
+            )}
 
             {/* Suggestions */}
             <div className="flex gap-2 flex-wrap">
