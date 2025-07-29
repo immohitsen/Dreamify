@@ -10,33 +10,28 @@ const ai = new GoogleGenAI({
 export async function dreamInterpreter(dream: string): Promise<string> {
   try {
     const prompt = `
-            Hey Gemini, my best friend!
-            Please tell me the meaning of this dream I had with some sense of humor and a friendly tone. But be real, don't be afraid to answer boldly and truthfully.
-            You are a dream interpreter who combines deep emotional intelligence, creative imagination, and symbolic analysis. Here's the dream:
+              Hey Gemini, my best friend!
+              Please tell me the meaning of this dream I had with some sense of humor and a friendly tone. But be real, don't be afraid to answer boldly and truthfully. Answer the dream directly in a para, like normal ques answer. Ans in 100 word strictly.
+              You are a dream interpreter who combines deep emotional intelligence, creative imagination, and symbolic analysis. Here's the dream:
 
-            "${dream}"
+              "${dream}"
 
-            Your task is to provide a full-length, meaningful interpretation. Follow this structure:
+              Your task is to provide a full-length, meaningful interpretation and not askingg any quesion or indulging in a conversation. Follow this structure:
 
-            1. Emotional Symbolism Analysis:
-              - Identify at least three key elements from the dream (people, places, actions, emotions, symbols).
-              - Explain what each of these could represent from a psychological and emotional perspective.
-              - Keep your explanations grounded but also empathetic and human.
+              1. Creative Reflection:
+                 - Explore what the subconscious might be trying to communicate through this dream.
+                 - Use metaphors or poetic insights to help me emotionally connect with the meaning.
+                 - Speak with depth and soul—no humor in this section, please.
 
-            2. Creative Reflection:
-              - Explore what the subconscious might be trying to communicate through this dream.
-              - Use metaphors or poetic insights to help me emotionally connect with the meaning.
-              - Speak with depth and soul—no humor in this section, please.
+              2. Imaginative Possibilities:
+                 - Invite me to imagine how this dream might relate to my possible futures or emotional truths.
+                 - End with an inspiring or introspective note that makes me reflect deeply.
 
-            3. Imaginative Possibilities:
-              - Invite me to imagine how this dream might relate to my possible futures or emotional truths.
-              - End with an inspiring or introspective note that makes me reflect deeply.
-
-            Please write this as a full paragraph response, at least 150 words. Make sure it's articulate, fluent, and emotionally resonant. Respond like a wise, grounded oracle with a gift for interpreting dreams. Only return the dream interpretation; do not include any other comments. Also don't ask questions, user just wants a dream interpretation and don't start a conversation.
-            `;
+              Please write this as a full paragraph response, at least 150 words. Make sure it's articulate, fluent, and emotionally resonant. Respond like a wise, grounded oracle with a gift for interpreting dreams. Only return the dream interpretation; do not include any other comments. Also don't ask questions, user just wants a dream interpretation and don't start a conversation.
+              `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-2.5-pro",
       contents: [{ role: "user", parts: [{ text: prompt }] }],
       config: {
         stopSequences: ["\n\n"],
