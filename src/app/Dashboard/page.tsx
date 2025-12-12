@@ -15,6 +15,52 @@ export default function Dashboard() {
     "I was flying through the clouds above a city...",
     "I saw my childhood home underwater with glowing fish...",
   ]);
+  const [userLocation, setUserLocation] = useState<any>(null);
+
+  // Get user's location when component mounts
+  React.useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log("Location captured:", { latitude, longitude });
+
+          // Optional: Get city/country from reverse geocoding API
+          try {
+            const geoResponse = await fetch(
+              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+            );
+            const geoData = await geoResponse.json();
+
+            setUserLocation({
+              country: geoData.countryName || "Unknown",
+              city: geoData.city || geoData.locality || "Unknown",
+              coordinates: {
+                latitude,
+                longitude
+              }
+            });
+          } catch (error) {
+            // If geocoding fails, just store coordinates
+            setUserLocation({
+              country: "Unknown",
+              city: "Unknown",
+              coordinates: { latitude, longitude }
+            });
+          }
+        },
+        (error) => {
+          console.log("Location access denied:", error);
+          // Set a default location for testing
+          setUserLocation({
+            country: "Unknown",
+            city: "Unknown",
+            coordinates: { latitude: 0, longitude: 0 }
+          });
+        }
+      );
+    }
+  }, []);
 
   const handleSuggestionClick = (text: string) => {
     setDream(text);
@@ -37,11 +83,14 @@ export default function Dashboard() {
       setLoading(false);
 
 
+      console.log("Sending to API:", { dream, location: userLocation });
+
       const update = await axios.post("/api/data", {
         prompt: dream,
-        response: data.reply
+        response: data.reply,
+        location: userLocation
       });
-      console.log(update.data);
+      console.log("API Response:", update.data);
     } catch (error) {
       console.log("Something went wrong", error);
     }
@@ -124,19 +173,22 @@ export default function Dashboard() {
                 </button>
               ))}
             </div>
-            {loading ? (
-              <div className="absolute bottom-2 right-2 w-5 h-5 border-2 border-t-transparent border-gray-500 dark:border-gray-300 rounded-full animate-spin" />
-            ) : (
-              ""
-            )}
           </div>
           <button
-            className="relative inline-flex h-10 w-[7rem] overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+            className="relative inline-flex h-10 w-[7rem] overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 disabled:opacity-70 disabled:cursor-not-allowed"
             onClick={handleSubmit}
+            disabled={loading}
           >
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-regular text-white backdrop-blur-3xl">
-              Generate
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-slate-950 px-3 py-1 text-sm font-regular text-white backdrop-blur-3xl">
+              {loading ? (
+                <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="#E2CBFF" strokeWidth="3"></circle>
+                  <path className="opacity-100" fill="#E2CBFF" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              ) : (
+                "Generate"
+              )}
             </span>
           </button>
           {response && (
