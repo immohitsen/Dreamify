@@ -4,6 +4,25 @@ import Data from "@/models/dataModel";
 
 connect();
 
+// Interface for location data
+interface LocationData {
+  country: string;
+  city: string;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
+}
+
+// Interface for data to save
+interface DataToSave {
+  prompt: string;
+  response: string;
+  userAgent: string;
+  dateTime: string;
+  location?: LocationData;
+}
+
 // Helper function to detect device type from user agent
 function getDeviceType(userAgent: string): string {
   const ua = userAgent.toLowerCase();
@@ -48,7 +67,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Create data object with all fields
-    const dataToSave: any = {
+    const dataToSave: DataToSave = {
       prompt,
       response,
       userAgent: device,

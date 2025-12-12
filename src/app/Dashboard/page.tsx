@@ -15,7 +15,14 @@ export default function Dashboard() {
     "I was flying through the clouds above a city...",
     "I saw my childhood home underwater with glowing fish...",
   ]);
-  const [userLocation, setUserLocation] = useState<any>(null);
+  const [userLocation, setUserLocation] = useState<{
+    country: string;
+    city: string;
+    coordinates: {
+      latitude: number;
+      longitude: number;
+    };
+  } | null>(null);
 
   // Get user's location when component mounts
   React.useEffect(() => {
@@ -40,7 +47,7 @@ export default function Dashboard() {
                 longitude
               }
             });
-          } catch (error) {
+          } catch {
             // If geocoding fails, just store coordinates
             setUserLocation({
               country: "Unknown",
